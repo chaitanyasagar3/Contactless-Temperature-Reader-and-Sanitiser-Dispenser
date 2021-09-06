@@ -1,0 +1,14 @@
+#define IRsensor 2
+void setup()
+{
+  pinMode(IRsensor, INPUT);
+  Serial.begin(9600);
+}
+int readPin = 0;
+void loop()
+{
+ readPin = digitalRead(IRsensor);
+ Serial.print("IR Sernsor Output = ");
+ Serial.println(readPin);
+ delay(200);
+}
