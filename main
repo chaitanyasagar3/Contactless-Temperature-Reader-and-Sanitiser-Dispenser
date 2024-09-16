@@ -1,0 +1,41 @@
+#include <Wire.h>
+#include <Adafruit_MLX90614.h>
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
+int IRsensor= 0;
+int water_pump = 2;
+int buzzer = 16;
+
+
+void setup() {
+  
+  Serial.begin(9600);
+  mlx.begin();  
+  pinMode(buzzer,OUTPUT);
+  pinMode(IRsensor, INPUT);
+  pinMode(water_pump, OUTPUT);
+
+}
+
+int readPin = 0;
+void loop() {
+  float temperature = mlx.readObjectTempF();  
+  readPin = digitalRead(IRsensor);
+  
+  if(readPin == HIGH){
+     digitalWrite(water_pump,HIGH);
+     Serial.println("DC Pump is ON Now!!");
+     Serial.println(temperature);
+     Serial.print(" F");   
+}
+else{
+  digitalWrite(water_pump,LOW);
+ Serial.println("DC Pump is OFF Now!!");
+ delay(500);
+}
+if( temperature>100){
+  digitalWrite(buzzer,HIGH);
+}
+else{
+ digitalWrite(buzzer,LOW); 
+}
+}

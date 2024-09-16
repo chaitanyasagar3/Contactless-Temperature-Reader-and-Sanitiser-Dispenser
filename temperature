@@ -1,0 +1,29 @@
+#include <Wire.h>
+
+#include <Adafruit_MLX90614.h>
+
+
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
+
+void setup() {
+  Serial.begin(9600);
+  mlx.begin();  
+  pinMode(16,OUTPUT);
+
+}
+
+void loop() {
+ float temperature = mlx.readObjectTempC();
+ Serial.println(temperature);
+ Serial.print(" C");
+ //digitalWrite(16,HIGH);
+ /*
+  delay(1000);
+ if (temperature >37){
+  digitalWrite(16,HIGH);
+ }
+ else{
+  digitalWrite(16,LOW);
+ }*/
+
+}
